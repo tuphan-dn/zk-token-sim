@@ -1,0 +1,25 @@
+[package]
+name = "zk-token-sim"
+version = "0.1.0"
+description = "Zero knowledge spl token simulator"
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "zk_token_sim"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+
+[dependencies]
+anchor-lang = { version = "0.22.0", features = ["init-if-needed"] }
+borsh = "0.9.3"
+curve25519-dalek = { version = "3.2.0", features = ["serde"] }
+num-traits = "0.2.14"
+solana-zk-token-sdk = "0.8.1"
+sha3 = "0.9"
+lazy_static = "1.4.0"
