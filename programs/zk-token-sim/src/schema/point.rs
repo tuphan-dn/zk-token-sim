@@ -21,7 +21,7 @@ lazy_static! {
  */
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
 pub struct Point {
-  value: EdwardsPoint,
+  pub value: EdwardsPoint,
 }
 
 impl AnchorSerialize for Point {
@@ -34,7 +34,7 @@ impl AnchorSerialize for Point {
 
 impl AnchorDeserialize for Point {
   fn deserialize(buf: &mut &[u8]) -> Result<Self> {
-    msg!("deserialize: buf.len {}", buf.len());
+    msg!("deserialize: buf.len {} {:?}", buf.len(), buf);
 
     let compressed_point = Box::new(CompressedEdwardsY::from_slice(buf));
     msg!("compressed_point {:?}", compressed_point);

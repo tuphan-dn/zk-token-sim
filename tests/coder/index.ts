@@ -1,5 +1,11 @@
 import { IDL } from "./../../target/types/zk_token_sim";
-import { Coder, Idl, Program, Provider, setProvider } from "@project-serum/anchor";
+import {
+  Coder,
+  Idl,
+  Program,
+  Provider,
+  setProvider,
+} from "@project-serum/anchor";
 
 import { SkTokenInstructionCoder } from "./instruction";
 import { ZkTokenStateCoder } from "./state";
@@ -25,7 +31,12 @@ export class SkTokenCoder implements Coder {
 }
 
 export function program(): Program<ZkTokenSim> {
-  return new Program<ZkTokenSim>(IDL, "8uJfchuep2PKUG8TUmqe1gneUMwcu5fkTtC7yoCvMVvd", Provider.env(), coder());
+  return new Program<ZkTokenSim>(
+    IDL,
+    "nynPTAntJVuD4cZYmG1sAPu6voznhRKN9yeA7ZKfnEy",
+    Provider.env(),
+    coder()
+  );
 }
 
 export function coder(): SkTokenCoder {

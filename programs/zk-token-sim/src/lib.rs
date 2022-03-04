@@ -7,22 +7,18 @@ pub use schema::*;
 pub mod instructions;
 pub use instructions::*;
 
-declare_id!("8uJfchuep2PKUG8TUmqe1gneUMwcu5fkTtC7yoCvMVvd");
-
-#[derive(Accounts)]
-pub struct Test {}
+declare_id!("nynPTAntJVuD4cZYmG1sAPu6voznhRKN9yeA7ZKfnEy");
 
 #[program]
 pub mod zk_token_sim {
   use super::*;
 
   pub fn initialize_mint(
-    ctx: Context<Test>,
+    ctx: Context<InitializeMint>,
     supply_commitment: Point,
     supply_decryption_handle: Point,
   ) -> Result<()> {
-    // initialize_mint::exec(ctx, supply_commitment, supply_decryption_handle)
-    Ok(())
+    initialize_mint::exec(ctx, supply_commitment, supply_decryption_handle)
   }
 
   // pub fn initialize_account(ctx: Context<InitializeAccount>) -> Result<()> {
