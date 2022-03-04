@@ -21,6 +21,7 @@ pub struct Transfer<'info> {
   pub dst_associated_token_account: Account<'info, account::Account>,
   #[account(mut)]
   pub src_owner: Signer<'info>,
+  /// CHECK: pure account
   pub dst_owner: AccountInfo<'info>,
   pub system_program: Program<'info, System>,
   pub rent: Sysvar<'info, Rent>,

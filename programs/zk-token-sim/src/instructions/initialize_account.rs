@@ -18,6 +18,7 @@ pub struct InitializeAccount<'info> {
   pub account: Account<'info, account::Account>,
   #[account(mut)]
   pub authority: Signer<'info>,
+  /// CHECK: pure account
   pub owner: AccountInfo<'info>,
   pub system_program: Program<'info, System>,
   pub rent: Sysvar<'info, Rent>,

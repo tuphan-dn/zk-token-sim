@@ -1,0 +1,244 @@
+{
+  "version": "0.1.0",
+  "name": "zk_token_sim",
+  "instructions": [
+    {
+      "name": "initializeMint",
+      "accounts": [
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "supplyCommitment",
+          "type": {
+            "defined": "Point"
+          }
+        },
+        {
+          "name": "supplyDecryptionHandle",
+          "type": {
+            "defined": "Point"
+          }
+        }
+      ]
+    },
+    {
+      "name": "initializeAccount",
+      "accounts": [
+        {
+          "name": "mint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "account",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "mintTo",
+      "accounts": [
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amountCommitment",
+          "type": {
+            "defined": "Point"
+          }
+        },
+        {
+          "name": "amountDecryptionHandle",
+          "type": {
+            "defined": "Point"
+          }
+        }
+      ]
+    },
+    {
+      "name": "transfer",
+      "accounts": [
+        {
+          "name": "mint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "srcAssociatedTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "dstAssociatedTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "srcOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "dstOwner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amountCommitment",
+          "type": {
+            "defined": "Point"
+          }
+        },
+        {
+          "name": "amountDecryptionHandle",
+          "type": {
+            "defined": "Point"
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Account",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "amountCommitment",
+            "type": {
+              "defined": "Point"
+            }
+          },
+          {
+            "name": "amountDecryptionHandle",
+            "type": {
+              "defined": "Point"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Mint",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "supplyCommitment",
+            "type": {
+              "defined": "Point"
+            }
+          },
+          {
+            "name": "supplyDecryptionHandle",
+            "type": {
+              "defined": "Point"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "Overflow",
+      "msg": "Operation overflowed"
+    }
+  ],
+  "metadata": {
+    "address": "CXLZFWXgxoAfdGXmYWKaJyvkMthsYrnjLgGs8KHVkWWq"
+  }
+}

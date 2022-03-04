@@ -20,6 +20,7 @@ pub struct MintTo<'info> {
   pub associated_token_account: Account<'info, account::Account>,
   #[account(mut)]
   pub authority: Signer<'info>,
+  /// CHECK: pure account
   pub owner: AccountInfo<'info>,
   pub system_program: Program<'info, System>,
   pub rent: Sysvar<'info, Rent>,

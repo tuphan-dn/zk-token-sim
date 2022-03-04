@@ -10,7 +10,7 @@ describe("zk-token-sim", () => {
 
   it("Is initialized!", async () => {
     // Add your test here.
-    const tx = await program.rpc.initialize({});
+    const tx = await program.rpc.initializeMint({});
     console.log("Your transaction signature", tx);
   });
 });
