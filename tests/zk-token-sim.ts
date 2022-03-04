@@ -7,6 +7,7 @@ describe("zk-token-sim", () => {
   anchor.setProvider(anchor.Provider.env());
 
   const program = anchor.workspace.ZkTokenSim as Program<ZkTokenSim>;
+  console.log(program);
 
   it("Is initialized!", async () => {
     // Add your test here.
