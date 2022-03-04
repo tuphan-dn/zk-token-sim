@@ -5,8 +5,8 @@ use borsh::{
 };
 use core::ops::{Add, Mul, Sub};
 use curve25519_dalek::{
-  constants::{RISTRETTO_BASEPOINT_COMPRESSED, RISTRETTO_BASEPOINT_POINT},
-  ristretto::{CompressedRistretto, RistrettoPoint},
+  constants::{ED25519_BASEPOINT_COMPRESSED, ED25519_BASEPOINT_POINT},
+  edwards::{CompressedEdwardsY, EdwardsPoint},
   scalar::Scalar,
 };
 use lazy_static::lazy_static;
@@ -14,10 +14,10 @@ use sha3::Sha3_512;
 
 lazy_static! {
   /// Pedersen base point for encoding messages to be committed.
-  pub static ref G: RistrettoPoint = RISTRETTO_BASEPOINT_POINT;
+  pub static ref G: EdwardsPoint = ED25519_BASEPOINT_POINT;
   /// Pedersen base point for encoding the commitment openings.
-  pub static ref H: RistrettoPoint =
-      RistrettoPoint::hash_from_bytes::<Sha3_512>(RISTRETTO_BASEPOINT_COMPRESSED.as_bytes());
+  pub static ref H: EdwardsPoint =
+  EdwardsPoint::hash_from_bytes::<Sha3_512>(ED25519_BASEPOINT_COMPRESSED.as_bytes());
 }
 
 /**
@@ -25,7 +25,7 @@ lazy_static! {
  */
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
 pub struct Point {
-  value: RistrettoPoint,
+  value: EdwardsPoint,
 }
 
 impl BorshSerialize for Point {
@@ -38,7 +38,7 @@ impl BorshSerialize for Point {
 impl BorshDeserialize for Point {
   fn deserialize(buf: &mut &[u8]) -> Result<Self> {
     Ok(Point {
-      value: CompressedRistretto::from_slice(buf)
+      value: CompressedEdwardsY::from_slice(buf)
         .decompress()
         .ok_or_else(|| {
           Error::new(
@@ -51,7 +51,7 @@ impl BorshDeserialize for Point {
 }
 
 impl Point {
-  pub const G: RistrettoPoint = RISTRETTO_BASEPOINT_POINT;
+  pub const G: EdwardsPoint = ED25519_BASEPOINT_POINT;
 
   pub fn add(&self, other: Point) -> Point {
     let p = self.value.add(other.value);
