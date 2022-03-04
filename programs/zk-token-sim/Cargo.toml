@@ -18,8 +18,8 @@ default = []
 [dependencies]
 anchor-lang = { version = "0.22.0", features = ["init-if-needed"] }
 borsh = "0.9.3"
-curve25519-dalek = { version = "3.2.0", features = ["serde"] }
+curve25519-dalek = { version = "3.2.1" }
 num-traits = "0.2.14"
-solana-zk-token-sdk = "0.8.1"
+getrandom = { version = "0.1", features = ["dummy"] }
 sha3 = "0.9"
 lazy_static = "1.4.0"

@@ -1,14 +1,14 @@
 [features]
 seeds = false
 [programs.localnet]
-zk_token_sim = "CXLZFWXgxoAfdGXmYWKaJyvkMthsYrnjLgGs8KHVkWWq"
+zk_token_sim = "8uJfchuep2PKUG8TUmqe1gneUMwcu5fkTtC7yoCvMVvd"
 
 [registry]
 url = "https://anchor.projectserum.com"
 
 [provider]
 cluster = "localnet"
-wallet = "/Users/tuphan/.config/solana/id.json"
+wallet = "/Users/congdm/my-solana-wallet/my-keypair.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

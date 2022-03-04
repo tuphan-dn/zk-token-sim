@@ -18,7 +18,13 @@ pub fn exec(
   supply_decryption_handle: Point,
 ) -> Result<()> {
   let mint = &mut ctx.accounts.mint;
-  mint.supply_commitment = supply_commitment;
-  mint.supply_decryption_handle = supply_decryption_handle;
+  msg!(
+    "{} {:?} {:?}",
+    mint.key(),
+    supply_commitment,
+    supply_decryption_handle
+  );
+  // mint.supply_commitment = supply_commitment;
+  // mint.supply_decryption_handle = supply_decryption_handle;
   Ok(())
 }
