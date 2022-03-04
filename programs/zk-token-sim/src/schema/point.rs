@@ -1,8 +1,5 @@
 use anchor_lang::prelude::*;
-use borsh::{
-  maybestd::io::{Result, Write},
-  BorshDeserialize, BorshSerialize,
-};
+use borsh::maybestd::io::{Result, Write};
 use core::ops::{Add, Mul, Sub};
 use curve25519_dalek::{
   constants::{ED25519_BASEPOINT_COMPRESSED, ED25519_BASEPOINT_POINT},
@@ -27,7 +24,7 @@ pub struct Point {
   value: EdwardsPoint,
 }
 
-impl BorshSerialize for Point {
+impl AnchorSerialize for Point {
   fn serialize<W: Write>(&self, writer: &mut W) -> Result<()> {
     let bytes = self.value.compress().to_bytes();
     msg!("serialize {}", bytes.len());
@@ -35,16 +32,17 @@ impl BorshSerialize for Point {
   }
 }
 
-impl BorshDeserialize for Point {
+impl AnchorDeserialize for Point {
   fn deserialize(buf: &mut &[u8]) -> Result<Self> {
     msg!("deserialize: buf.len {}", buf.len());
 
     let compressed_point = Box::new(CompressedEdwardsY::from_slice(buf));
     msg!("compressed_point {:?}", compressed_point);
-    msg!("point {:?}", compressed_point.decompress());
+    // msg!("point {:?}", compressed_point.decompress());
 
     let point = Point {
-      value: compressed_point.decompress().unwrap(),
+      // value: compressed_point.decompress().unwrap(),
+      value: ED25519_BASEPOINT_POINT,
     };
 
     Ok(point)
@@ -53,6 +51,8 @@ impl BorshDeserialize for Point {
 
 impl Point {
   // pub const G: EdwardsPoint = ED25519_BASEPOINT_POINT;
+
+  pub const LEN: usize = 32;
 
   pub fn add(&self, other: Point) -> Point {
     let p = self.value.add(other.value);

@@ -18,7 +18,7 @@ pub mod zk_token_sim {
 
   pub fn initialize_mint(
     ctx: Context<Test>,
-    supply_commitment: Pubkey,
+    supply_commitment: Point,
     supply_decryption_handle: Point,
   ) -> Result<()> {
     // initialize_mint::exec(ctx, supply_commitment, supply_decryption_handle)
