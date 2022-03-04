@@ -1,4 +1,3 @@
-use crate::point::Point;
 use crate::schema::{account, mint};
 use anchor_lang::prelude::*;
 
@@ -29,8 +28,8 @@ pub struct Transfer<'info> {
 
 pub fn exec(
   ctx: Context<Transfer>,
-  amount_commitment: Point,
-  amount_decryption_handle: Point,
+  amount_commitment: Pubkey,
+  amount_decryption_handle: Pubkey,
 ) -> Result<()> {
   let src_associated_token_account = &mut ctx.accounts.src_associated_token_account;
   src_associated_token_account.sub(amount_commitment, amount_decryption_handle);

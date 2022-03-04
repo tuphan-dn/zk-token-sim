@@ -1,5 +1,4 @@
 use anchor_lang::prelude::*;
-use borsh::maybestd::io::{Result, Write};
 use core::ops::{Add, Mul, Sub};
 use curve25519_dalek::{
   constants::{ED25519_BASEPOINT_COMPRESSED, ED25519_BASEPOINT_POINT},
@@ -20,52 +19,29 @@ lazy_static! {
  * EC Point
  */
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
-pub struct Point {
-  pub value: EdwardsPoint,
-}
-
-impl AnchorSerialize for Point {
-  fn serialize<W: Write>(&self, writer: &mut W) -> Result<()> {
-    let bytes = self.value.compress().to_bytes();
-    msg!("serialize {}", bytes.len());
-    writer.write_all(&bytes)
-  }
-}
-
-impl AnchorDeserialize for Point {
-  fn deserialize(buf: &mut &[u8]) -> Result<Self> {
-    msg!("deserialize: buf.len {} {:?}", buf.len(), buf);
-
-    let compressed_point = Box::new(CompressedEdwardsY::from_slice(buf));
-    msg!("compressed_point {:?}", compressed_point);
-    // msg!("point {:?}", compressed_point.decompress());
-
-    let point = Point {
-      // value: compressed_point.decompress().unwrap(),
-      value: ED25519_BASEPOINT_POINT,
-    };
-
-    Ok(point)
-  }
-}
+pub struct Point(pub(crate) EdwardsPoint);
 
 impl Point {
-  // pub const G: EdwardsPoint = ED25519_BASEPOINT_POINT;
+  pub const G: EdwardsPoint = ED25519_BASEPOINT_POINT;
 
-  pub const LEN: usize = 32;
+  pub fn new_from_pubkey(pubkey: Pubkey) -> Self {
+    let buf = pubkey.to_bytes();
+    Self(CompressedEdwardsY::from_slice(&buf).decompress().unwrap())
+  }
+
+  pub fn to_pubkey(&self) -> Pubkey {
+    Pubkey::new_from_array(self.0.compress().to_bytes())
+  }
 
   pub fn add(&self, other: Point) -> Point {
-    let p = self.value.add(other.value);
-    return Point { value: p };
+    Point(self.0.add(other.0))
   }
 
   pub fn sub(&self, other: Point) -> Point {
-    let p = self.value.sub(other.value);
-    return Point { value: p };
+    Point(self.0.sub(other.0))
   }
 
   pub fn mul(&self, scalar: Scalar) -> Point {
-    let p = self.value.mul(scalar);
-    return Point { value: p };
+    Point(self.0.mul(scalar))
   }
 }

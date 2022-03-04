@@ -7,8 +7,8 @@ use anchor_lang::prelude::*;
 #[account]
 pub struct Account {
   pub authority: Pubkey,
-  pub amount_commitment: Point,
-  pub amount_decryption_handle: Point,
+  pub amount_commitment: Pubkey,
+  pub amount_decryption_handle: Pubkey,
 }
 
 impl Account {
@@ -16,20 +16,28 @@ impl Account {
 
   pub fn add(
     &mut self,
-    amount_commitment: Point,
-    amount_decryption_handle: Point,
-  ) -> Option<(Point, Point)> {
-    self.amount_commitment = self.amount_commitment.add(amount_commitment);
-    self.amount_decryption_handle = self.amount_decryption_handle.add(amount_decryption_handle);
-    return Some((self.amount_commitment, self.amount_decryption_handle));
+    amount_commitment: Pubkey,
+    amount_decryption_handle: Pubkey,
+  ) -> Option<(Pubkey, Pubkey)> {
+    let prev_ac = Point::new_from_pubkey(self.amount_commitment);
+    let ac = Point::new_from_pubkey(amount_commitment);
+    let prev_ad = Point::new_from_pubkey(self.amount_decryption_handle);
+    let ad = Point::new_from_pubkey(amount_decryption_handle);
+    let nxt_ac = prev_ac.add(ac);
+    let nxt_ad = prev_ad.add(ad);
+    return Some((nxt_ac.to_pubkey(), nxt_ad.to_pubkey()));
   }
   pub fn sub(
     &mut self,
-    amount_commitment: Point,
-    amount_decryption_handle: Point,
-  ) -> Option<(Point, Point)> {
-    self.amount_commitment = self.amount_commitment.sub(amount_commitment);
-    self.amount_decryption_handle = self.amount_decryption_handle.sub(amount_decryption_handle);
-    return Some((self.amount_commitment, self.amount_decryption_handle));
+    amount_commitment: Pubkey,
+    amount_decryption_handle: Pubkey,
+  ) -> Option<(Pubkey, Pubkey)> {
+    let prev_ac = Point::new_from_pubkey(self.amount_commitment);
+    let ac = Point::new_from_pubkey(amount_commitment);
+    let prev_ad = Point::new_from_pubkey(self.amount_decryption_handle);
+    let ad = Point::new_from_pubkey(amount_decryption_handle);
+    let nxt_ac = prev_ac.sub(ac);
+    let nxt_ad = prev_ad.sub(ad);
+    return Some((nxt_ac.to_pubkey(), nxt_ad.to_pubkey()));
   }
 }

@@ -1315,6 +1315,7 @@ dependencies = [
  "curve25519-dalek",
  "getrandom 0.1.16",
  "lazy_static",
+ "num-derive",
  "num-traits",
  "sha3",
 ]

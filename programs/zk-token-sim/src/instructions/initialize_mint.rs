@@ -1,4 +1,3 @@
-use crate::point::Point;
 use crate::schema::mint;
 use anchor_lang::prelude::*;
 
@@ -14,17 +13,13 @@ pub struct InitializeMint<'info> {
 
 pub fn exec(
   ctx: Context<InitializeMint>,
-  supply_commitment: Point,
-  supply_decryption_handle: Point,
+  supply_commitment: Pubkey,
+  supply_decryption_handle: Pubkey,
 ) -> Result<()> {
   let mint = &mut ctx.accounts.mint;
-  // msg!(
-  //   "{} {:?} {:?}",
-  //   mint.key(),
-  //   supply_commitment,
-  //   supply_decryption_handle
-  // );
+  mint.authority = ctx.accounts.authority.key();
   mint.supply_commitment = supply_commitment;
   mint.supply_decryption_handle = supply_decryption_handle;
+  msg!("{:?}", mint);
   Ok(())
 }

@@ -1,4 +1,3 @@
-use crate::point::Point;
 use crate::schema::{account, mint};
 use anchor_lang::prelude::*;
 
@@ -28,13 +27,12 @@ pub struct MintTo<'info> {
 
 pub fn exec(
   ctx: Context<MintTo>,
-  amount_commitment: Point,
-  amount_decryption_handle: Point,
+  amount_commitment: Pubkey,
+  amount_decryption_handle: Pubkey,
 ) -> Result<()> {
   // Update mint
   let mint = &mut ctx.accounts.mint;
-  mint.supply_commitment = mint.supply_commitment.add(amount_commitment);
-  mint.supply_decryption_handle = mint.supply_decryption_handle.add(amount_decryption_handle);
+  mint.mint_to(amount_commitment, amount_decryption_handle);
   // Update account
   let associated_token_account = &mut ctx.accounts.associated_token_account;
   associated_token_account.authority = ctx.accounts.owner.key();
