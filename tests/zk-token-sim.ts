@@ -22,7 +22,7 @@ describe("zk-token-sim", () => {
 
     const mint = Keypair.generate();
 
-    const tx = await programWorkspace.rpc.initializeMint(publicKeyTest, pointTest, {
+    const tx = await programWorkspace.rpc.initializeMint(pointTest, pointTest, {
       // accounts: {
       //   mint: mint.publicKey,
       //   authority: programWorkspace.provider.wallet.publicKey,
