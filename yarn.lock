@@ -30,6 +30,11 @@
     "@ethersproject/logger" "^5.5.0"
     "hash.js" "1.1.7"
 
+"@noble/ed25519@^1.6.0":
+  "integrity" "sha512-UKju89WV37IUALIMfKhKW3psO8AqmrE/GvH6QbPKjzolQ98zM7WmGUeY+xdIgSf5tqPFf75ZCYMgym6E9Jsw3Q=="
+  "resolved" "https://registry.npmjs.org/@noble/ed25519/-/ed25519-1.6.0.tgz"
+  "version" "1.6.0"
+
 "@project-serum/anchor@^0.22.0":
   "integrity" "sha512-5pHeyvQhzLahIQ8aZymmDMZJAJFklN0joZdI+YIqFkK2uU/mlKr6rBLQjxysf/j1mLLiNG00tdyLfUtTAdQz7w=="
   "resolved" "https://registry.npmjs.org/@project-serum/anchor/-/anchor-0.22.1.tgz"
@@ -1113,7 +1118,7 @@
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.3.1.tgz"
   "version" "2.3.1"
 
-"tweetnacl@^1.0.0":
+"tweetnacl@^1.0.0", "tweetnacl@^1.0.3":
   "integrity" "sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw=="
   "resolved" "https://registry.npmjs.org/tweetnacl/-/tweetnacl-1.0.3.tgz"
   "version" "1.0.3"

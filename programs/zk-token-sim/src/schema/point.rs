@@ -9,8 +9,6 @@ use lazy_static::lazy_static;
 use sha3::Sha3_512;
 
 lazy_static! {
-  /// Pedersen base point for encoding messages to be committed.
-  pub static ref G: EdwardsPoint = ED25519_BASEPOINT_POINT;
   /// Pedersen base point for encoding the commitment openings.
   pub static ref H: EdwardsPoint = EdwardsPoint::hash_from_bytes::<Sha3_512>(ED25519_BASEPOINT_COMPRESSED.as_bytes());
 }
@@ -22,7 +20,12 @@ lazy_static! {
 pub struct Point(pub(crate) EdwardsPoint);
 
 impl Point {
-  pub const G: EdwardsPoint = ED25519_BASEPOINT_POINT;
+  pub fn get_base() -> Self {
+    Self(ED25519_BASEPOINT_POINT)
+  }
+  pub fn get_infinity() -> Self {
+    Self(ED25519_BASEPOINT_POINT.sub(ED25519_BASEPOINT_POINT))
+  }
 
   pub fn new_from_pubkey(pubkey: Pubkey) -> Self {
     let buf = pubkey.to_bytes();

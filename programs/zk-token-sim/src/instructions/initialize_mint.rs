@@ -20,6 +20,5 @@ pub fn exec(
   mint.authority = ctx.accounts.authority.key();
   mint.supply_commitment = supply_commitment;
   mint.supply_decryption_handle = supply_decryption_handle;
-  msg!("{:?}", mint);
   Ok(())
 }

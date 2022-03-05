@@ -1,4 +1,4 @@
-use crate::schema::{account, mint};
+use crate::schema::{account, mint, point::*};
 use anchor_lang::prelude::*;
 
 #[derive(Accounts)]
@@ -27,5 +27,7 @@ pub struct InitializeAccount<'info> {
 pub fn exec(ctx: Context<InitializeAccount>) -> Result<()> {
   let account = &mut ctx.accounts.account;
   account.authority = ctx.accounts.owner.key();
+  account.amount_commitment = Point::get_infinity().to_pubkey();
+  account.amount_decryption_handle = Point::get_infinity().to_pubkey();
   Ok(())
 }

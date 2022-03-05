@@ -18,7 +18,7 @@ default = []
 [dependencies]
 anchor-lang = { version = "0.22.0", features = ["init-if-needed"] }
 borsh = "0.9.3"
-curve25519-dalek = { version = "3.2.0" }
+curve25519-dalek = { version = "3.2.0", features = ["nightly"] }
 num-traits = "0.2.14"
 getrandom = { version = "0.1.14", features = ["dummy"] }
 sha3 = "0.9"
